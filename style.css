@@ -1,0 +1,339 @@
+:root {
+    /* Light Mode Variables */
+    --bg-color: #f0f4f8; 
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --text-main: #1e293b; 
+    --text-muted: #64748b; 
+    --primary: #4f46e5; 
+    
+    /* Strength Colors */
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+    
+    --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    /* FIX: Ensure display is flex column */
+    display: flex;
+    flex-direction: column; 
+    overflow-x: hidden;
+    position: relative;
+    /* FIX: Removed 'padding' from here. This was causing the gap below the footer. */
+    padding: 0; 
+}
+
+/* Background Blobs */
+.background-shapes .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -1;
+    animation: float 10s infinite alternate;
+}
+.shape-1 {
+    top: -10%; left: -10%; width: 500px; height: 500px;
+    background: #c4b5fd; opacity: 0.6;
+}
+.shape-2 {
+    bottom: -10%; right: -10%; width: 400px; height: 400px;
+    background: #67e8f9; opacity: 0.5;
+}
+.shape-3 {
+    top: 40%; left: 40%; width: 300px; height: 300px;
+    background: #fca5a5; opacity: 0.4;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(30px, 50px); }
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    /* FIX: Moved the vertical spacing here so it doesn't affect the footer */
+    padding: 40px 20px; 
+    z-index: 1;
+    margin: 0 auto; 
+    /* FIX: This pushes the footer down if content is short */
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header .logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--primary);
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Light Glass Card Styling */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px); 
+}
+
+/* Input Section */
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 18px;
+    color: var(--text-muted);
+    z-index: 2;
+}
+
+input[type="password"], input[type="text"] {
+    width: 100%;
+    padding: 16px 50px 16px 45px;
+    border-radius: 14px;
+    border: 2px solid #e2e8f0; 
+    background: #ffffff;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+#toggle-password {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+    transition: color 0.2s;
+}
+#toggle-password:hover { color: var(--primary); }
+
+/* Strength Meter */
+.strength-meter-container {
+    margin: 30px 0;
+}
+
+.meter-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.progress-bg {
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--danger);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
+    border-radius: 20px;
+}
+
+/* Requirements List */
+.requirements-box h3, .tips-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+#requirements-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+#requirements-list li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+#requirements-list li.valid {
+    color: var(--text-main);
+    font-weight: 500;
+}
+#requirements-list li.valid i {
+    color: var(--success);
+}
+
+/* TIPS CARD STYLES */
+.tips-list {
+    list-style: none;
+}
+
+.tips-list li {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+.tips-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.tip-icon {
+    background: #e0e7ff;
+    color: var(--primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.tips-content {
+    flex: 1;
+}
+
+.tips-list strong {
+    display: block;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    font-size: 1rem;
+}
+.tips-list p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ... existing styles ... */
+
+.footer {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 25px 20px; /* Increased padding slightly */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent */
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--glass-border);
+}
+
+.footer p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+/* Makes your name bold and colored like the design */
+.footer strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Space between icons */
+}
+
+.social-links a {
+    color: #64748b; /* Grey color for icons */
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure footer icons are the right size */
+.social-links .icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: currentColor; /* Uses the link color */
+}
+
+/* Hover effect */
+.social-links a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
